@@ -499,9 +499,22 @@
     
     <footer>
         <p>© 2026 AI创意工坊 · 智能视觉生成平台</p>
+        <p style="margin-top:0.5rem;font-size:0.7rem;color:#9ca3af;">
+            👁️ 已访问 <span id="visit-count">...</span> 次
+        </p>
     </footer>
     
     <script>
+        // Simple visitor counter (no registration needed)
+        fetch('https://api.countapi.xyz/hit/dessons-ai-workshop/visits')
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById('visit-count').textContent = d.value.toLocaleString();
+            })
+            .catch(() => {
+                document.getElementById('visit-count').textContent = '—';
+            });
+    </script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
