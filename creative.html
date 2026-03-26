@@ -33,6 +33,18 @@
         
         html { scroll-behavior: smooth; }
         
+        /* Nav brand */
+        .nav-brand-fixed {
+            position: fixed;
+            top: 1.25rem;
+            left: 2rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text);
+            z-index: 101;
+            letter-spacing: -0.01em;
+        }
+        
         /* Hero */
         .hero {
             min-height: 100vh;
@@ -347,6 +359,8 @@
     </style>
 </head>
 <body>
+    <span class="nav-brand-fixed">AI生意助手</span>
+    
     <!-- Hero -->
     <section class="hero">
         <p class="eyebrow">全新发布</p>
