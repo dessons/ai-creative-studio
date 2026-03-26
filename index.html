@@ -130,36 +130,29 @@
             50% { transform: translateX(-50%) translateY(8px); }
         }
         
-        /* Hero showcase image */
+        /* Hero showcase - single featured image */
         .hero-showcase {
             margin-top: 3rem;
-            max-width: 900px;
+            max-width: 700px;
             width: 100%;
             position: relative;
             z-index: 2;
         }
         
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.75rem;
-            padding: 0 1rem;
-        }
-        
-        .showcase-item {
-            border-radius: 12px;
+        .showcase-single {
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
             transition: transform 0.4s ease;
         }
         
-        .showcase-item:hover {
-            transform: scale(1.05);
+        .showcase-single:hover {
+            transform: scale(1.02);
         }
         
-        .showcase-item img {
+        .showcase-single img {
             width: 100%;
-            aspect-ratio: 1;
+            aspect-ratio: 16/9;
             object-fit: cover;
             display: block;
         }
@@ -369,7 +362,6 @@
         }
         
         @media (max-width: 768px) {
-            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
             .features-grid { grid-template-columns: 1fr; }
             .feature-card.wide { grid-column: span 1; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -387,19 +379,8 @@
             <a href="https://aistudio.alibaba.com/ai-studio#/creative-workshop/imageGenerate" target="_blank" class="btn-primary">立即体验 →</a>
         </div>
         <div class="hero-showcase">
-            <div class="showcase-grid">
-                <div class="showcase-item">
-                    <img src="https://img.alicdn.com/imgextra/i2/O1CN0109VMPu1vtOcTbKuxT_!!6000000006230-1-tps-920-920.gif" alt="场景图生成">
-                </div>
-                <div class="showcase-item">
-                    <img src="https://oneday-react-native.oss-cn-zhangjiakou.aliyuncs.com/oneday/source/f272faa8-f9bb-4baf-97e7-f307e5311265.gif" alt="商品换色">
-                </div>
-                <div class="showcase-item">
-                    <img src="https://img.alicdn.com/imgextra/i1/O1CN01obEgvQ1Ska8kIMtYv_!!6000000002285-1-tps-920-920.gif" alt="高清图">
-                </div>
-                <div class="showcase-item">
-                    <img src="https://img.alicdn.com/imgextra/i3/O1CN0147MeVi1HJ8dOE7LMt_!!6000000000736-1-tps-920-920.gif" alt="白底图">
-                </div>
+            <div class="showcase-single">
+                <img src="https://img.alicdn.com/imgextra/i2/O1CN0109VMPu1vtOcTbKuxT_!!6000000006230-1-tps-920-920.gif" alt="AI创意工坊演示">
             </div>
         </div>
         <div class="scroll-hint">向下滚动探索</div>
