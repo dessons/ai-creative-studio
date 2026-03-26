@@ -7,111 +7,180 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg:#fbfbfd; --text:#1d1d1f; --text-secondary:#6e6e73; --accent:#0071e3; --card-bg:#fff; --border:rgba(0,0,0,0.08); --section-alt:#f5f5f7; }
+        :root { --bg:#fbfbfd; --text:#1d1d1f; --text-secondary:#6e6e73; --accent:#0071e3; --card-bg:#fff; --border:rgba(0,0,0,0.08); }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
         html { scroll-behavior:smooth; }
         
         .nav { position:fixed; top:0; left:0; right:0; height:52px; background:rgba(251,251,253,0.8); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 2rem; z-index:100; }
-        .nav-brand { font-weight:600; font-size:1rem; }
+        .nav-brand { font-weight:600; font-size:1rem; text-decoration:none; color:inherit; }
         .nav-links { display:flex; gap:2rem; list-style:none; }
         .nav-links a { color:var(--text-secondary); text-decoration:none; font-size:0.875rem; transition:color 0.2s; }
         .nav-links a:hover { color:var(--text); }
         
-        .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:6rem 2rem 4rem; }
+        /* Hero */
+        .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:6rem 2rem; position:relative; }
         .eyebrow { font-size:1.25rem; font-weight:500; color:var(--accent); margin-bottom:1rem; }
         .hero h1 { font-size:clamp(3rem,8vw,5.5rem); font-weight:700; letter-spacing:-0.03em; line-height:1.05; margin-bottom:1rem; background:linear-gradient(135deg,#0071e3 0%,#9333ea 50%,#ec4899 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-        .hero .subtitle { font-size:clamp(1.125rem,2vw,1.5rem); color:var(--text-secondary); max-width:600px; line-height:1.5; margin-bottom:3rem; }
+        .hero .subtitle { font-size:clamp(1.125rem,2vw,1.5rem); color:var(--text-secondary); max-width:600px; line-height:1.5; margin-bottom:2.5rem; }
+        .btn-primary { display:inline-flex; align-items:center; gap:0.5rem; background:var(--accent); color:#fff; padding:1rem 2rem; border-radius:980px; text-decoration:none; font-weight:500; font-size:1rem; transition:all 0.3s ease; }
+        .btn-primary:hover { background:#0077ed; transform:scale(1.02); }
         
-        .features-grid { max-width:1000px; margin:0 auto; display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; padding:0 2rem; }
-        .feature-card { background:var(--card-bg); border:1px solid var(--border); border-radius:20px; overflow:hidden; transition:all 0.4s ease; text-decoration:none; color:inherit; display:block; }
-        .feature-card:hover { transform:translateY(-6px); box-shadow:0 20px 60px rgba(0,0,0,0.08); }
-        .feature-card-header { padding:2rem 2rem 1.5rem; display:flex; align-items:center; gap:1rem; }
-        .feature-icon { width:48px; height:48px; background:linear-gradient(135deg,var(--accent),#9333ea); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0; }
-        .feature-card-header h3 { font-size:1.375rem; font-weight:600; }
-        .feature-card-body { padding:0 2rem 2rem; }
-        .feature-card-body p { color:var(--text-secondary); font-size:0.9375rem; line-height:1.6; }
-        .feature-card-footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:right; }
-        .feature-card-footer span { color:var(--accent); font-size:0.875rem; font-weight:500; }
-        
-        .stats-bar { display:flex; justify-content:center; gap:3rem; padding:4rem 2rem; flex-wrap:wrap; background:var(--section-alt); }
+        /* Stats bar */
+        .stats-bar { display:flex; justify-content:center; gap:4rem; padding:3rem 2rem; background:var(--card-bg); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
         .stat { text-align:center; }
-        .stat-value { font-size:2.5rem; font-weight:700; color:var(--text); }
-        .stat-label { font-size:0.875rem; color:var(--text-secondary); margin-top:0.25rem; }
+        .stat-value { font-size:2rem; font-weight:700; }
+        .stat-label { font-size:0.8125rem; color:var(--text-secondary); margin-top:0.25rem; }
+        
+        /* Feature floors */
+        .floor { min-height:100vh; display:flex; align-items:center; padding:4rem 2rem; position:relative; }
+        .floor:nth-child(even) { background:#f5f5f7; }
+        .floor-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; width:100%; }
+        .floor.reverse .floor-inner { direction:rtl; }
+        .floor.reverse .floor-inner > * { direction:ltr; }
+        
+        .floor-content { max-width:450px; }
+        .floor-icon { width:56px; height:56px; background:linear-gradient(135deg,var(--accent),#9333ea); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.75rem; margin-bottom:1.5rem; }
+        .floor-content h2 { font-size:clamp(2rem,4vw,2.75rem); font-weight:700; letter-spacing:-0.02em; margin-bottom:1rem; line-height:1.1; }
+        .floor-content p { font-size:1.0625rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1.5rem; }
+        .floor-highlights { list-style:none; margin-bottom:2rem; }
+        .floor-highlights li { display:flex; align-items:flex-start; gap:0.625rem; padding:0.5rem 0; font-size:0.9375rem; color:var(--text-secondary); }
+        .floor-highlights li::before { content:'✓'; color:var(--accent); font-weight:700; flex-shrink:0; }
+        .floor-link { color:var(--accent); text-decoration:none; font-weight:500; font-size:1rem; display:inline-flex; align-items:center; gap:0.375rem; transition:gap 0.2s; }
+        .floor-link:hover { gap:0.625rem; }
+        
+        .floor-visual { display:flex; align-items:center; justify-content:center; }
+        .floor-img { width:100%; max-width:480px; aspect-ratio:4/3; object-fit:cover; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.1); }
         
         footer { padding:2rem; text-align:center; border-top:1px solid var(--border); color:var(--text-secondary); font-size:0.75rem; }
         
-        @media (max-width:768px) { .features-grid { grid-template-columns:1fr; } .nav-links { display:none; } }
+        .fade-in { opacity:0; transform:translateY(40px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .fade-in.visible { opacity:1; transform:translateY(0); }
+        
+        @media (max-width:768px) {
+            .floor-inner { grid-template-columns:1fr; gap:2rem; }
+            .floor.reverse .floor-inner { direction:ltr; }
+            .stats-bar { gap:2rem; flex-wrap:wrap; }
+            .nav-links { display:none; }
+        }
     </style>
 </head>
 <body>
     <nav class="nav">
-        <div class="nav-brand">AI生意助手</div>
+        <a href="index.html" class="nav-brand">AI生意助手</a>
         <ul class="nav-links">
-            <li><a href="listing.html">智能发品</a></li>
-            <li><a href="migration.html">搬品搬店</a></li>
-            <li><a href="creative.html">创意工坊</a></li>
-            <li><a href="store.html">店铺装修</a></li>
+            <li><a href="#listing-floor">智能发品</a></li>
+            <li><a href="#migration-floor">搬品搬店</a></li>
+            <li><a href="#creative-floor">创意工坊</a></li>
+            <li><a href="#store-floor">店铺装修</a></li>
         </ul>
     </nav>
     
+    <!-- Hero -->
     <section class="hero">
         <p class="eyebrow">Alibaba.com 商家端 AI 产品</p>
         <h1>AI生意助手</h1>
         <p class="subtitle">让全球贸易触手可及。覆盖全球 18万+ 企业，能力 ≈ Top25% 业务员。</p>
+        <a href="https://aistudio.alibaba.com/ai-studio#/creative-workshop/imageGenerate" target="_blank" class="btn-primary">立即体验 →</a>
     </section>
     
+    <!-- Stats -->
     <div class="stats-bar">
         <div class="stat"><div class="stat-value">18万+</div><div class="stat-label">覆盖企业</div></div>
         <div class="stat"><div class="stat-value">Top25%</div><div class="stat-label">业务能力</div></div>
         <div class="stat"><div class="stat-value">+52%</div><div class="stat-label">买家转化率</div></div>
+        <div class="stat"><div class="stat-value">4大功能</div><div class="stat-label">全面赋能</div></div>
     </div>
     
-    <section style="padding:6rem 0;">
-        <div class="features-grid">
-            <a href="listing.html" class="feature-card">
-                <div class="feature-card-header">
-                    <div class="feature-icon">📦</div>
-                    <h3>AI 智能发品</h3>
-                </div>
-                <div class="feature-card-body">
-                    <p>输入商品卖点，AI 自动生成标题、属性、详情页。最快 1 分钟完成高质量发品，效率提升 10 倍。</p>
-                </div>
-                <div class="feature-card-footer"><span>了解更多 →</span></div>
-            </a>
-            <a href="migration.html" class="feature-card">
-                <div class="feature-card-header">
-                    <div class="feature-icon">🔄</div>
-                    <h3>AI 搬品搬店</h3>
-                </div>
-                <div class="feature-card-body">
-                    <p>支持 1688、淘宝、亚马逊等平台一键搬品。AI 智能翻译、图片无损复原，直接发品率近 90%。</p>
-                </div>
-                <div class="feature-card-footer"><span>了解更多 →</span></div>
-            </a>
-            <a href="creative.html" class="feature-card">
-                <div class="feature-card-header">
-                    <div class="feature-icon">🎨</div>
-                    <h3>AI 创意工坊</h3>
-                </div>
-                <div class="feature-card-body">
-                    <p>AI 智能生成场景图、模特图、细节图。让商品更有质感，提升买家点击量，数秒即得省时省力。</p>
-                </div>
-                <div class="feature-card-footer"><span>了解更多 →</span></div>
-            </a>
-            <a href="store.html" class="feature-card">
-                <div class="feature-card-header">
-                    <div class="feature-icon">🏪</div>
-                    <h3>AI 店铺装修</h3>
-                </div>
-                <div class="feature-card-body">
-                    <p>PC、移动端自适配，最快 2 分钟完成。AI 替你专业表达店铺实力，多平台高质量模板支持。</p>
-                </div>
-                <div class="feature-card-footer"><span>了解更多 →</span></div>
-            </a>
+    <!-- Floor 1: 智能发品 -->
+    <section id="listing-floor" class="floor">
+        <div class="floor-inner fade-in">
+            <div class="floor-content">
+                <div class="floor-icon">📦</div>
+                <h2>AI 智能发品</h2>
+                <p>现在的买家都在用 AI 搜产品，你的发品方式也得跟上。AI 把你的商品卖点翻译成买家搜索的"标准答案"。</p>
+                <ul class="floor-highlights">
+                    <li>最快 1 分钟发布高质量商品</li>
+                    <li>智能填写表单（标题/属性/详情）</li>
+                    <li>AI 智能生成商品图</li>
+                    <li>内容质量稳定专业</li>
+                </ul>
+                <a href="listing.html" class="floor-link">了解更多 →</a>
+            </div>
+            <div class="floor-visual">
+                <img class="floor-img" src="https://img.alicdn.com/imgextra/i2/O1CN0109VMPu1vtOcTbKuxT_!!6000000006230-1-tps-920-920.gif" alt="智能发品演示">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Floor 2: 搬品搬店 -->
+    <section id="migration-floor" class="floor reverse">
+        <div class="floor-inner fade-in">
+            <div class="floor-content">
+                <div class="floor-icon">🔄</div>
+                <h2>AI 搬品搬店</h2>
+                <p>支持 1688、淘宝天猫、亚马逊等 4 个平台 URL 一键搬品。AI 智能翻译、图片无损复原，直接发品率接近 90%。</p>
+                <ul class="floor-highlights">
+                    <li>4 平台支持（1688/淘宝/天猫/亚马逊）</li>
+                    <li>90% 直接发品成功率</li>
+                    <li>批量搬运支持 100 个 URL</li>
+                    <li>智能翻译 + 图片无损复原</li>
+                </ul>
+                <a href="migration.html" class="floor-link">了解更多 →</a>
+            </div>
+            <div class="floor-visual">
+                <img class="floor-img" src="https://oneday-react-native.oss-cn-zhangjiakou.aliyuncs.com/oneday/source/f272faa8-f9bb-4baf-97e7-f307e5311265.gif" alt="搬品搬店演示">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Floor 3: 创意工坊 -->
+    <section id="creative-floor" class="floor">
+        <div class="floor-inner fade-in">
+            <div class="floor-content">
+                <div class="floor-icon">🎨</div>
+                <h2>AI 创意工坊</h2>
+                <p>智能视觉生成，让商品更有质感。场景图、模特图、细节图，数秒即得省时省力。全行业 1000+ 场景图模板。</p>
+                <ul class="floor-highlights">
+                    <li>场景图生成 — 一键生成高质量场景图</li>
+                    <li>商品换色 — AI 智能换色展示</li>
+                    <li>定制Logo上品 — 智能定制品牌标识</li>
+                    <li>白底图 — AI 一键生成纯白背景图</li>
+                </ul>
+                <a href="creative.html" class="floor-link">了解更多 →</a>
+            </div>
+            <div class="floor-visual">
+                <img class="floor-img" src="https://img.alicdn.com/imgextra/i1/O1CN01obEgvQ1Ska8kIMtYv_!!6000000002285-1-tps-920-920.gif" alt="创意工坊演示">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Floor 4: 店铺装修 -->
+    <section id="store-floor" class="floor reverse">
+        <div class="floor-inner fade-in">
+            <div class="floor-content">
+                <div class="floor-icon">🏪</div>
+                <h2>AI 店铺装修</h2>
+                <p>行业模板一键生成，AI 自动收集店铺信息，2 分钟智能搭建首页。PC、移动端自适配，多平台高质量模板支持。</p>
+                <ul class="floor-highlights">
+                    <li>行业模板 — 多种行业优秀模板</li>
+                    <li>AI 自动收集店铺信息</li>
+                    <li>2 分钟快速完成首页搭建</li>
+                    <li>PC/移动端自动适配</li>
+                </ul>
+                <a href="store.html" class="floor-link">了解更多 →</a>
+            </div>
+            <div class="floor-visual">
+                <img class="floor-img" src="https://img.alicdn.com/imgextra/i3/O1CN0147MeVi1HJ8dOE7LMt_!!6000000000736-1-tps-920-920.gif" alt="店铺装修演示">
+            </div>
         </div>
     </section>
     
     <footer>© 2026 AI生意助手 · Alibaba.com 商家端 AI 产品</footer>
+    
+    <script>
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.15 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
