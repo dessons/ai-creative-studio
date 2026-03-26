@@ -37,21 +37,10 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 4rem 2rem 6rem;
+            padding: 4rem 2rem 3rem;
             position: relative;
             background: linear-gradient(180deg, #fff 0%, var(--bg) 100%);
             overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 120%;
-            height: 60%;
-            bottom: 0;
-            left: -10%;
-            background: radial-gradient(ellipse at center bottom, rgba(0,113,227,0.06) 0%, transparent 70%);
-            pointer-events: none;
         }
         
         .eyebrow {
@@ -70,7 +59,10 @@
             letter-spacing: -0.03em;
             line-height: 1.05;
             margin-bottom: 1.5rem;
-            color: var(--text);
+            background: linear-gradient(135deg, #0071e3 0%, #9333ea 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             position: relative;
             z-index: 2;
         }
@@ -115,7 +107,7 @@
         
         .scroll-hint {
             position: absolute;
-            bottom: 2rem;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -138,40 +130,38 @@
             50% { transform: translateX(-50%) translateY(8px); }
         }
         
-        /* Floating cards in hero */
-        .hero-float-cards {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
+        /* Hero showcase image */
+        .hero-showcase {
+            margin-top: 3rem;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            padding: 0 1rem;
+        }
+        
+        .showcase-item {
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease;
         }
         
-        .float-card {
-            position: absolute;
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1rem 1.25rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-            animation: float 6s ease-in-out infinite;
+        .showcase-item:hover {
+            transform: scale(1.05);
         }
         
-        .float-card:nth-child(1) { top: 18%; left: 8%; animation-delay: 0s; }
-        .float-card:nth-child(2) { top: 25%; right: 10%; animation-delay: 1.5s; }
-        .float-card:nth-child(3) { bottom: 22%; left: 12%; animation-delay: 3s; }
-        .float-card:nth-child(4) { bottom: 18%; right: 8%; animation-delay: 4.5s; }
-        
-        .float-card img {
-            width: 80px;
-            height: 80px;
+        .showcase-item img {
+            width: 100%;
+            aspect-ratio: 1;
             object-fit: cover;
-            border-radius: 8px;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            display: block;
         }
         
         section { padding: 8rem 2rem; }
@@ -379,7 +369,7 @@
         }
         
         @media (max-width: 768px) {
-            .float-card { display: none; }
+            .showcase-grid { grid-template-columns: repeat(2, 1fr); }
             .features-grid { grid-template-columns: 1fr; }
             .feature-card.wide { grid-column: span 1; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -390,25 +380,27 @@
 <body>
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-float-cards">
-            <div class="float-card">
-                <img src="https://img.alicdn.com/imgextra/i2/O1CN0109VMPu1vtOcTbKuxT_!!6000000006230-1-tps-920-920.gif" alt="">
-            </div>
-            <div class="float-card">
-                <img src="https://oneday-react-native.oss-cn-zhangjiakou.aliyuncs.com/oneday/source/f272faa8-f9bb-4baf-97e7-f307e5311265.gif" alt="">
-            </div>
-            <div class="float-card">
-                <img src="https://img.alicdn.com/imgextra/i1/O1CN01obEgvQ1Ska8kIMtYv_!!6000000002285-1-tps-920-920.gif" alt="">
-            </div>
-            <div class="float-card">
-                <img src="https://img.alicdn.com/imgextra/i3/O1CN0147MeVi1HJ8dOE7LMt_!!6000000000736-1-tps-920-920.gif" alt="">
-            </div>
-        </div>
         <p class="eyebrow">全新发布</p>
         <h1>AI创意工坊</h1>
         <p class="subtitle">智能视觉生成，让商品更有质感。<br>场景图、模特图、细节图，数秒即得。</p>
         <div class="cta-group">
             <a href="https://aistudio.alibaba.com/ai-studio#/creative-workshop/imageGenerate" target="_blank" class="btn-primary">立即体验 →</a>
+        </div>
+        <div class="hero-showcase">
+            <div class="showcase-grid">
+                <div class="showcase-item">
+                    <img src="https://img.alicdn.com/imgextra/i2/O1CN0109VMPu1vtOcTbKuxT_!!6000000006230-1-tps-920-920.gif" alt="场景图生成">
+                </div>
+                <div class="showcase-item">
+                    <img src="https://oneday-react-native.oss-cn-zhangjiakou.aliyuncs.com/oneday/source/f272faa8-f9bb-4baf-97e7-f307e5311265.gif" alt="商品换色">
+                </div>
+                <div class="showcase-item">
+                    <img src="https://img.alicdn.com/imgextra/i1/O1CN01obEgvQ1Ska8kIMtYv_!!6000000002285-1-tps-920-920.gif" alt="高清图">
+                </div>
+                <div class="showcase-item">
+                    <img src="https://img.alicdn.com/imgextra/i3/O1CN0147MeVi1HJ8dOE7LMt_!!6000000000736-1-tps-920-920.gif" alt="白底图">
+                </div>
+            </div>
         </div>
         <div class="scroll-hint">向下滚动探索</div>
     </section>
