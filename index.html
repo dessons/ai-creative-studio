@@ -7,309 +7,111 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #fbfbfd;
-            --text: #1d1d1f;
-            --text-secondary: #6e6e73;
-            --accent: #0071e3;
-            --card-bg: #fff;
-            --border: rgba(0,0,0,0.08);
-            --section-alt: #f5f5f7;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-        html { scroll-behavior: smooth; }
+        :root { --bg:#fbfbfd; --text:#1d1d1f; --text-secondary:#6e6e73; --accent:#0071e3; --card-bg:#fff; --border:rgba(0,0,0,0.08); --section-alt:#f5f5f7; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+        html { scroll-behavior:smooth; }
         
-        .nav {
-            position: fixed; top: 0; left: 0; right: 0; height: 52px;
-            background: rgba(251,251,253,0.8); backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid var(--border); display: flex; align-items: center;
-            justify-content: space-between; padding: 0 2rem; z-index: 100;
-        }
-        .nav-brand { font-weight: 600; font-size: 1rem; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--text); }
+        .nav { position:fixed; top:0; left:0; right:0; height:52px; background:rgba(251,251,253,0.8); backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 2rem; z-index:100; }
+        .nav-brand { font-weight:600; font-size:1rem; }
+        .nav-links { display:flex; gap:2rem; list-style:none; }
+        .nav-links a { color:var(--text-secondary); text-decoration:none; font-size:0.875rem; transition:color 0.2s; }
+        .nav-links a:hover { color:var(--text); }
         
-        .hero {
-            min-height: 100vh; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center;
-            padding: 6rem 2rem 4rem; position: relative;
-        }
-        .eyebrow { font-size: 1.25rem; font-weight: 500; color: var(--accent); margin-bottom: 1rem; }
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 700; letter-spacing: -0.03em;
-            line-height: 1.05; margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #0071e3 0%, #9333ea 50%, #ec4899 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .hero .subtitle {
-            font-size: clamp(1.125rem, 2vw, 1.5rem); color: var(--text-secondary);
-            max-width: 650px; line-height: 1.5; margin-bottom: 2.5rem;
-        }
-        .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-        .btn-primary {
-            display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent);
-            color: #fff; padding: 1rem 2rem; border-radius: 980px; text-decoration: none;
-            font-weight: 500; font-size: 1rem; transition: all 0.3s ease;
-        }
-        .btn-primary:hover { background: #0077ed; transform: scale(1.02); }
-        .scroll-hint {
-            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-            color: var(--text-secondary); font-size: 0.875rem; animation: bounce 2s infinite;
-        }
-        .scroll-hint::after { content: '↓'; display: block; font-size: 1.25rem; margin-top: 0.25rem; }
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(8px); }
-        }
+        .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:6rem 2rem 4rem; }
+        .eyebrow { font-size:1.25rem; font-weight:500; color:var(--accent); margin-bottom:1rem; }
+        .hero h1 { font-size:clamp(3rem,8vw,5.5rem); font-weight:700; letter-spacing:-0.03em; line-height:1.05; margin-bottom:1rem; background:linear-gradient(135deg,#0071e3 0%,#9333ea 50%,#ec4899 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .hero .subtitle { font-size:clamp(1.125rem,2vw,1.5rem); color:var(--text-secondary); max-width:600px; line-height:1.5; margin-bottom:3rem; }
         
-        section { padding: 6rem 2rem; }
-        .section-header { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
-        .section-header h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
-        .section-header p { font-size: 1.125rem; color: var(--text-secondary); }
+        .features-grid { max-width:1000px; margin:0 auto; display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; padding:0 2rem; }
+        .feature-card { background:var(--card-bg); border:1px solid var(--border); border-radius:20px; overflow:hidden; transition:all 0.4s ease; text-decoration:none; color:inherit; display:block; }
+        .feature-card:hover { transform:translateY(-6px); box-shadow:0 20px 60px rgba(0,0,0,0.08); }
+        .feature-card-header { padding:2rem 2rem 1.5rem; display:flex; align-items:center; gap:1rem; }
+        .feature-icon { width:48px; height:48px; background:linear-gradient(135deg,var(--accent),#9333ea); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0; }
+        .feature-card-header h3 { font-size:1.375rem; font-weight:600; }
+        .feature-card-body { padding:0 2rem 2rem; }
+        .feature-card-body p { color:var(--text-secondary); font-size:0.9375rem; line-height:1.6; }
+        .feature-card-footer { padding:1rem 2rem; border-top:1px solid var(--border); text-align:right; }
+        .feature-card-footer span { color:var(--accent); font-size:0.875rem; font-weight:500; }
         
-        .feature-section { padding: 5rem 2rem; }
-        .feature-section:nth-child(even) { background: var(--section-alt); }
-        .feature-inner { max-width: 1000px; margin: 0 auto; }
-        .feature-header { text-align: center; margin-bottom: 2.5rem; }
-        .feature-icon {
-            width: 56px; height: 56px; background: linear-gradient(135deg, var(--accent), #9333ea);
-            border-radius: 14px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; margin: 0 auto 1.25rem;
-        }
-        .feature-header h3 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.75rem; }
-        .feature-header p { color: var(--text-secondary); font-size: 1rem; max-width: 550px; margin: 0 auto; line-height: 1.6; }
-        .feature-highlights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
-        .highlight-item {
-            display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem;
-            background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);
-        }
-        .highlight-check { color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 0.125rem; }
-        .highlight-item span { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.5; }
+        .stats-bar { display:flex; justify-content:center; gap:3rem; padding:4rem 2rem; flex-wrap:wrap; background:var(--section-alt); }
+        .stat { text-align:center; }
+        .stat-value { font-size:2.5rem; font-weight:700; color:var(--text); }
+        .stat-label { font-size:0.875rem; color:var(--text-secondary); margin-top:0.25rem; }
         
-        .compare-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-        .compare-box { padding: 1.75rem; border-radius: 16px; border: 1px solid var(--border); }
-        .compare-box.old { background: #fff5f5; }
-        .compare-box.new { background: #f0fdf4; border-color: rgba(34,197,94,0.25); }
-        .compare-box h4 { font-size: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        .compare-box.old h4 { color: #dc2626; }
-        .compare-box.new h4 { color: #16a34a; }
-        .compare-list { list-style: none; }
-        .compare-list li {
-            padding: 0.625rem 0; border-bottom: 1px solid var(--border);
-            display: flex; align-items: center; gap: 0.625rem; color: var(--text-secondary); font-size: 0.875rem;
-        }
-        .compare-list li:last-child { border-bottom: none; }
-        .tag-old { background: rgba(220,38,38,0.1); color: #dc2626; padding: 0.125rem 0.4rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
-        .tag-new { background: rgba(22,163,74,0.1); color: #16a34a; padding: 0.125rem 0.4rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
+        footer { padding:2rem; text-align:center; border-top:1px solid var(--border); color:var(--text-secondary); font-size:0.75rem; }
         
-        .cta-final { text-align: center; padding: 6rem 2rem; background: var(--section-alt); }
-        .cta-final h2 { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 0.75rem; }
-        .cta-final p { color: var(--text-secondary); font-size: 1.125rem; margin-bottom: 2rem; }
-        footer { padding: 2rem; text-align: center; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.75rem; }
-        
-        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-        
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .feature-highlights { grid-template-columns: 1fr; }
-            .compare-row { grid-template-columns: 1fr; }
-        }
+        @media (max-width:768px) { .features-grid { grid-template-columns:1fr; } .nav-links { display:none; } }
     </style>
 </head>
 <body>
     <nav class="nav">
         <div class="nav-brand">AI生意助手</div>
         <ul class="nav-links">
-            <li><a href="#listing">智能发品</a></li>
-            <li><a href="#migration">搬品搬店</a></li>
-            <li><a href="#creative">创意工坊</a></li>
-            <li><a href="#store">店铺装修</a></li>
+            <li><a href="listing.html">智能发品</a></li>
+            <li><a href="migration.html">搬品搬店</a></li>
+            <li><a href="creative.html">创意工坊</a></li>
+            <li><a href="store.html">店铺装修</a></li>
         </ul>
     </nav>
     
     <section class="hero">
         <p class="eyebrow">Alibaba.com 商家端 AI 产品</p>
         <h1>AI生意助手</h1>
-        <p class="subtitle">让全球贸易触手可及。覆盖全球 18万+ 企业，能力 ≈ Top25% 业务员，买家转化率 +52%。</p>
-        <div class="cta-group">
-            <a href="https://aistudio.alibaba.com/ai-studio#/creative-workshop/imageGenerate" target="_blank" class="btn-primary">立即体验 →</a>
-        </div>
-        <div class="scroll-hint">向下探索</div>
+        <p class="subtitle">让全球贸易触手可及。覆盖全球 18万+ 企业，能力 ≈ Top25% 业务员。</p>
     </section>
     
-    <!-- 智能发品 -->
-    <section id="listing" class="feature-section">
-        <div class="feature-inner fade-in">
-            <div class="feature-header">
-                <div class="feature-icon">📦</div>
-                <h3>AI 智能发品</h3>
-                <p>现在的买家都在用 AI 搜产品，你的发品方式也得跟上。AI 把你的商品卖点翻译成买家搜索的"标准答案"。</p>
-            </div>
-            <div class="feature-highlights">
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>最快 1 分钟发布高质量商品</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>智能填写表单（标题/属性/详情）</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>AI 智能生成商品图</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>内容质量稳定专业</span></div>
-            </div>
-            <div class="compare-row">
-                <div class="compare-box old">
-                    <h4>❌ 传统发品</h4>
-                    <ul class="compare-list">
-                        <li><span class="tag-old">慢</span> 平均 30-60 分钟/商品</li>
-                        <li><span class="tag-old">繁琐</span> 手动填写标题、属性、详情</li>
-                        <li><span class="tag-old">成本高</span> 需要专业设计师制图</li>
-                        <li><span class="tag-old">不稳定</span> 内容质量参差不齐</li>
-                    </ul>
-                </div>
-                <div class="compare-box new">
-                    <h4>✅ AI 智能发品</h4>
-                    <ul class="compare-list">
-                        <li><span class="tag-new">极速</span> 最快 1 分钟完成发品</li>
-                        <li><span class="tag-new">自动</span> AI 自动生成优质内容</li>
-                        <li><span class="tag-new">智能</span> AI 智能生成商品图</li>
-                        <li><span class="tag-new">专业</span> 内容质量稳定专业</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="stats-bar">
+        <div class="stat"><div class="stat-value">18万+</div><div class="stat-label">覆盖企业</div></div>
+        <div class="stat"><div class="stat-value">Top25%</div><div class="stat-label">业务能力</div></div>
+        <div class="stat"><div class="stat-value">+52%</div><div class="stat-label">买家转化率</div></div>
+    </div>
     
-    <!-- 搬品搬店 -->
-    <section id="migration" class="feature-section">
-        <div class="feature-inner fade-in">
-            <div class="feature-header">
-                <div class="feature-icon">🔄</div>
-                <h3>AI 搬品搬店</h3>
-                <p>支持 1688、淘宝天猫、亚马逊等 4 个平台 URL 一键搬品。AI 智能翻译、图片无损复原，直接发品率接近 90%。</p>
-            </div>
-            <div class="feature-highlights">
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>4 平台支持（1688/淘宝/天猫/亚马逊）</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>90% 直接发品成功率</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>批量搬运支持 100 个 URL</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>智能翻译 + 图片无损复原</span></div>
-            </div>
-            <div class="compare-row">
-                <div class="compare-box old">
-                    <h4>❌ 传统搬品</h4>
-                    <ul class="compare-list">
-                        <li><span class="tag-old">费力</span> 手动复制粘贴商品信息</li>
-                        <li><span class="tag-old">易错</span> 人工翻译，易出错</li>
-                        <li><span class="tag-old">繁琐</span> 逐张下载保存图片</li>
-                        <li><span class="tag-old">缓慢</span> 单个商品需 1-2 小时</li>
-                    </ul>
+    <section style="padding:6rem 0;">
+        <div class="features-grid">
+            <a href="listing.html" class="feature-card">
+                <div class="feature-card-header">
+                    <div class="feature-icon">📦</div>
+                    <h3>AI 智能发品</h3>
                 </div>
-                <div class="compare-box new">
-                    <h4>✅ AI 搬品搬店</h4>
-                    <ul class="compare-list">
-                        <li><span class="tag-new">便捷</span> 粘贴 URL 一键搬运</li>
-                        <li><span class="tag-new">精准</span> AI 智能翻译，准确率 95%+</li>
-                        <li><span class="tag-new">自动</span> 图片无损自动复原</li>
-                        <li><span class="tag-new">批量</span> 100 个同时处理</li>
-                    </ul>
+                <div class="feature-card-body">
+                    <p>输入商品卖点，AI 自动生成标题、属性、详情页。最快 1 分钟完成高质量发品，效率提升 10 倍。</p>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 创意工坊 -->
-    <section id="creative" class="feature-section">
-        <div class="feature-inner fade-in">
-            <div class="feature-header">
-                <div class="feature-icon">🎨</div>
-                <h3>AI 创意工坊</h3>
-                <p>智能视觉生成，让商品更有质感。场景图、模特图、细节图，数秒即得。</p>
-            </div>
-            <div class="feature-highlights">
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>场景图生成 — 一键生成高质量场景图</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>商品换色 — AI 智能换色展示</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>定制Logo上品 — 智能定制品牌标识</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>白底图 — AI 一键生成纯白背景图</span></div>
-            </div>
-            <div class="compare-row">
-                <div class="compare-box old">
-                    <h4>❌ 传统制图</h4>
-                    <ul class="compare-list">
-                        <li><span class="tag-old">贵</span> 单次拍摄成本 ¥3000-5000</li>
-                        <li><span class="tag-old">慢</span> 制作周期 3-7 天</li>
-                        <li><span class="tag-old">重</span> 需要专业摄影团队</li>
-                        <li><span class="tag-old">僵化</span> 换色需重新拍摄</li>
-                    </ul>
+                <div class="feature-card-footer"><span>了解更多 →</span></div>
+            </a>
+            <a href="migration.html" class="feature-card">
+                <div class="feature-card-header">
+                    <div class="feature-icon">🔄</div>
+                    <h3>AI 搬品搬店</h3>
                 </div>
-                <div class="compare-box new">
-                    <h4>✅ AI 创意工坊</h4>
-                    <ul class="compare-list">
-                        <li><span class="tag-new">省钱</span> 成本降低 90%</li>
-                        <li><span class="tag-new">极速</span> 数秒即得，即时生成</li>
-                        <li><span class="tag-new">智能</span> AI 自动生成，无需拍摄</li>
-                        <li><span class="tag-new">灵活</span> 一键换色，无限可能</li>
-                    </ul>
+                <div class="feature-card-body">
+                    <p>支持 1688、淘宝、亚马逊等平台一键搬品。AI 智能翻译、图片无损复原，直接发品率近 90%。</p>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 店铺装修 -->
-    <section id="store" class="feature-section">
-        <div class="feature-inner fade-in">
-            <div class="feature-header">
-                <div class="feature-icon">🏪</div>
-                <h3>AI 店铺装修</h3>
-                <p>行业模板一键生成，AI 自动收集店铺信息，2 分钟智能搭建首页。PC、移动端自适配。</p>
-            </div>
-            <div class="feature-highlights">
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>行业模板 — 多种行业优秀模板</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>AI 自动收集店铺信息</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>2 分钟快速完成首页搭建</span></div>
-                <div class="highlight-item"><span class="highlight-check">✓</span><span>PC/移动端自动适配</span></div>
-            </div>
-            <div class="compare-row">
-                <div class="compare-box old">
-                    <h4>❌ 传统装修</h4>
-                    <ul class="compare-list">
-                        <li><span class="tag-old">门槛高</span> 需要懂代码或找外包</li>
-                        <li><span class="tag-old">昂贵</span> 外包费用 ¥5000-20000</li>
-                        <li><span class="tag-old">缓慢</span> 装修周期 1-2 周</li>
-                        <li><span class="tag-old">繁琐</span> PC/移动端需分别设计</li>
-                    </ul>
+                <div class="feature-card-footer"><span>了解更多 →</span></div>
+            </a>
+            <a href="creative.html" class="feature-card">
+                <div class="feature-card-header">
+                    <div class="feature-icon">🎨</div>
+                    <h3>AI 创意工坊</h3>
                 </div>
-                <div class="compare-box new">
-                    <h4>✅ AI 店铺装修</h4>
-                    <ul class="compare-list">
-                        <li><span class="tag-new">简单</span> 零代码，可视化操作</li>
-                        <li><span class="tag-new">免费</span> 完全免费使用</li>
-                        <li><span class="tag-new">极速</span> 2 分钟快速完成</li>
-                        <li><span class="tag-new">自适应</span> PC/移动端自动适配</li>
-                    </ul>
+                <div class="feature-card-body">
+                    <p>AI 智能生成场景图、模特图、细节图。让商品更有质感，提升买家点击量，数秒即得省时省力。</p>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- CTA -->
-    <section class="cta-final">
-        <h2 class="fade-in">准备好了吗？</h2>
-        <p class="fade-in">立即体验 AI生意助手，让全球贸易触手可及。</p>
-        <div class="cta-group fade-in">
-            <a href="https://aistudio.alibaba.com/ai-studio#/creative-workshop/imageGenerate" target="_blank" class="btn-primary">立即体验 →</a>
+                <div class="feature-card-footer"><span>了解更多 →</span></div>
+            </a>
+            <a href="store.html" class="feature-card">
+                <div class="feature-card-header">
+                    <div class="feature-icon">🏪</div>
+                    <h3>AI 店铺装修</h3>
+                </div>
+                <div class="feature-card-body">
+                    <p>PC、移动端自适配，最快 2 分钟完成。AI 替你专业表达店铺实力，多平台高质量模板支持。</p>
+                </div>
+                <div class="feature-card-footer"><span>了解更多 →</span></div>
+            </a>
         </div>
     </section>
     
     <footer>© 2026 AI生意助手 · Alibaba.com 商家端 AI 产品</footer>
-    
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    </script>
 </body>
 </html>
