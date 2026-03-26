@@ -23,6 +23,9 @@
         .btn-primary { display:inline-flex; align-items:center; gap:0.5rem; background:var(--accent); color:#fff; padding:1rem 2rem; border-radius:980px; text-decoration:none; font-weight:500; font-size:1rem; transition:all 0.3s ease; }
         .btn-primary:hover { background:#0077ed; transform:scale(1.02); }
         .scroll-hint { position:absolute; bottom:1.5rem; left:50%; transform:translateX(-50%); color:var(--text-secondary); font-size:0.875rem; animation:bounce 2s infinite; }
+        .showcase-single { border-radius:20px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.1); transition:transform 0.4s ease; }
+        .showcase-single:hover { transform:scale(1.02); }
+        .showcase-single img, .showcase-single video { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
         .scroll-hint::after { content:'↓'; display:block; font-size:1.25rem; margin-top:0.25rem; }
         @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(8px);} }
         section { padding:6rem 2rem; }
@@ -69,6 +72,11 @@
         <h1>AI 店铺装修</h1>
         <p class="subtitle">行业模板一键生成，AI 自动收集店铺信息，2 分钟智能搭建首页。PC、移动端自适配。</p>
         <a href="https://aistudio.alibaba.com/ai-studio#/creative-workshop/imageGenerate" target="_blank" class="btn-primary">立即体验 →</a>
+        <div class="hero-showcase" style="margin-top:3rem;max-width:800px;width:100%;">
+            <video autoplay muted loop playsinline style="width:100%;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.1);">
+                <source src="https://cloud.video.taobao.com/vod/xdhVHTP5TfkVyHvw2ZYnsVXAZg8O6aYz0Q7gQIEw-eM.mp4" type="video/mp4">
+            </video>
+        </div>
         <div class="scroll-hint">向下滚动探索</div>
     </section>
     <section style="background:var(--section-alt);">
