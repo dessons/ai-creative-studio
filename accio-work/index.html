@@ -9,22 +9,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
 <style>
 /* ═══════════════════════════════════════════
-   DESIGN TOKENS — Accio Dark Theme
+   DESIGN TOKENS — Light Theme (Accio style)
    ═══════════════════════════════════════════ */
 :root {
   --green: #10b981;
   --green-light: #34d399;
-  --green-dim: rgba(16,185,129,0.15);
-  --green-border: rgba(16,185,129,0.25);
-  --green-glow: rgba(16,185,129,0.08);
-  --bg-deep: #070c0a;
-  --bg-card: rgba(16,185,129,0.04);
-  --bg-card-hover: rgba(16,185,129,0.07);
-  --border-subtle: rgba(255,255,255,0.06);
-  --border-card: rgba(16,185,129,0.18);
-  --text-1: #f0f0f0;
-  --text-2: rgba(255,255,255,0.55);
-  --text-3: rgba(255,255,255,0.3);
+  --green-dark: #059669;
+  --bg: #ffffff;
+  --bg-alt: #f7f7f8;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0fdf4;
+  --border-subtle: #e8e8ed;
+  --border-card: rgba(16,185,129,0.25);
+  --text-1: #1d1d1f;
+  --text-2: #6e6e73;
+  --text-3: #aeaeb2;
   --radius-lg: 20px;
   --radius-md: 14px;
 }
@@ -34,7 +33,7 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: "Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
-  background: var(--bg-deep);
+  background: var(--bg);
   color: var(--text-1);
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
@@ -42,16 +41,21 @@ body {
 }
 
 /* ═══════════════════════════════════════════
-   AMBIENT — dark gradient bg like Accio
+   LOGO
+   ═══════════════════════════════════════════ */
+.logo-img {
+  width: clamp(240px, 45vw, 420px);
+  height: auto;
+}
+
+/* ═══════════════════════════════════════════
+   AMBIENT
    ═══════════════════════════════════════════ */
 .ambient {
   position: fixed; inset: 0; pointer-events: none; z-index: 0;
   background:
-    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(16,185,129,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(16,185,129,0.03) 0%, transparent 50%),
-    radial-gradient(ellipse 30% 40% at 80% 60%, rgba(16,185,129,0.02) 0%, transparent 50%);
+    radial-gradient(ellipse 60% 40% at 50% -5%, rgba(16,185,129,0.04) 0%, transparent 70%);
 }
-
 .page { position: relative; z-index: 1; }
 
 /* ═══════════════════════════════════════════
@@ -60,7 +64,7 @@ body {
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: 3.5rem; display: flex; align-items: center;
-  background: rgba(7,12,10,0.85);
+  background: rgba(255,255,255,0.85);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -68,15 +72,15 @@ body {
   display: flex; align-items: center; justify-content: space-between;
   width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
 }
-.nav-logo { font-size: 1rem; font-weight: 800; letter-spacing: -0.02em; }
+.nav-logo { font-size: 1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-1); }
 .nav-logo .em { color: var(--green); }
 .nav-cta {
   padding: 0.4rem 1rem; border-radius: 999px;
   font-size: 0.8rem; font-weight: 700; text-decoration: none;
-  background: var(--green); color: var(--bg-deep);
+  background: var(--green); color: #fff;
   transition: all 0.2s;
 }
-.nav-cta:hover { background: var(--green-light); }
+.nav-cta:hover { background: var(--green-dark); }
 
 /* ═══════════════════════════════════════════
    LAYOUT
@@ -104,25 +108,20 @@ body {
   font-size: clamp(2.4rem, 6vw, 3.5rem);
   font-weight: 900; letter-spacing: -0.04em; line-height: 1.08;
 }
-.h2 .accent {
-  position: relative;
-}
+.h2 .accent { position: relative; }
 .h2 .accent::after {
-  content: '';
-  position: absolute; left: 0; right: 0; bottom: -2px;
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px;
   height: 4px; background: var(--green);
-  border-radius: 2px;
-  box-shadow: 0 0 12px rgba(16,185,129,0.4);
+  border-radius: 2px; box-shadow: 0 0 12px rgba(16,185,129,0.4);
+}
+.h3-title {
+  font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em;
+  color: var(--text-1);
 }
 .h3 {
   font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em;
 }
 .accent { color: var(--green); }
-.accent-underline {
-  color: var(--green); position: relative;
-  border-bottom: 2px solid var(--green);
-  padding-bottom: 2px;
-}
 .sub {
   font-size: clamp(0.95rem, 1.6vw, 1.08rem);
   color: var(--text-2); max-width: 580px; line-height: 1.7;
@@ -138,18 +137,23 @@ body {
   transition: all 0.25s; cursor: pointer; border: none;
 }
 .btn-green {
-  background: var(--green); color: var(--bg-deep);
-  box-shadow: 0 0 40px rgba(16,185,129,0.2), 0 0 80px rgba(16,185,129,0.06);
+  background: var(--green); color: #fff;
+  box-shadow: 0 6px 20px rgba(16,185,129,0.3);
 }
-.btn-green:hover { background: var(--green-light); transform: translateY(-2px); }
+.btn-green:hover { background: var(--green-dark); transform: translateY(-2px); }
 .btn-ghost {
   background: transparent; color: var(--text-1);
   border: 1px solid var(--border-subtle);
 }
 .btn-ghost:hover { border-color: var(--green); color: var(--green); }
+.btn-white {
+  background: #fff; color: var(--text-1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.btn-white:hover { background: var(--bg-alt); transform: translateY(-1px); }
 
 /* ═══════════════════════════════════════════
-   EYEBROW BADGE
+   BADGE
    ═══════════════════════════════════════════ */
 .badge {
   display: inline-flex; align-items: center; gap: 0.4rem;
@@ -157,8 +161,8 @@ body {
   font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
   text-transform: uppercase;
   background: rgba(16,185,129,0.08);
-  color: var(--green);
-  border: 1px solid rgba(16,185,129,0.12);
+  color: var(--green-dark);
+  border: 1px solid rgba(16,185,129,0.15);
   margin-bottom: 1rem;
 }
 .badge .dot {
@@ -168,7 +172,7 @@ body {
 }
 
 /* ═══════════════════════════════════════════
-   CARD — dark with green border on hover
+   CARD
    ═══════════════════════════════════════════ */
 .card {
   background: var(--bg-card);
@@ -179,34 +183,9 @@ body {
 }
 .card:hover {
   border-color: var(--border-card);
-  background: var(--bg-card-hover);
-  box-shadow: 0 0 60px rgba(16,185,129,0.05);
+  box-shadow: 0 8px 30px rgba(16,185,129,0.08);
+  transform: translateY(-2px);
 }
-
-/* ═══════════════════════════════════════════
-   STEP CARD — like Accio tutorial style
-   ═══════════════════════════════════════════ */
-.step-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 2rem 2rem 1.5rem;
-  position: relative;
-  margin-bottom: 1rem;
-}
-.step-card::before {
-  content: ''; position: absolute; top: 0; left: 2rem;
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 12px rgba(16,185,129,0.5);
-  transform: translateY(-50%);
-}
-.step-title {
-  font-size: 1.05rem; font-weight: 700;
-  padding-left: 1.5rem; margin-bottom: 1rem;
-  color: var(--text-1);
-}
-.step-title .accent { color: var(--green); }
 
 /* ═══════════════════════════════════════════
    FEATURE GRID
@@ -216,7 +195,6 @@ body {
   margin-top: 2.5rem;
 }
 @media (min-width: 768px) { .feat-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
-
 .feat-icon {
   width: 2.6rem; height: 2.6rem; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
@@ -224,9 +202,7 @@ body {
   background: rgba(16,185,129,0.08);
   border: 1px solid rgba(16,185,129,0.1);
 }
-.feat-sub {
-  font-size: 0.82rem; color: var(--text-3); margin-top: 0.2rem;
-}
+.feat-sub { font-size: 0.82rem; color: var(--text-3); margin-top: 0.2rem; }
 .feat-list { list-style: none; margin-top: 1rem; }
 .feat-list li {
   padding: 0.45rem 0 0.45rem 1.3rem; position: relative;
@@ -250,49 +226,47 @@ body {
 .flow-arrow { font-size: 0.9rem; color: var(--text-3); flex-shrink: 0; }
 
 /* ═══════════════════════════════════════════
-   TABS
+   VIDEO WRAPPER
    ═══════════════════════════════════════════ */
-.tabs {
-  display: inline-flex; gap: 0.25rem; padding: 0.25rem;
-  background: rgba(255,255,255,0.03);
+.video-wrap {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-alt);
   border: 1px solid var(--border-subtle);
-  border-radius: 999px; margin-top: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+  margin-top: 2rem;
 }
-.tab-btn {
-  padding: 0.5rem 1.3rem; border-radius: 999px;
-  font-size: 0.8rem; font-weight: 600; border: none;
-  background: transparent; color: var(--text-2); cursor: pointer;
-  transition: all 0.2s;
+.video-wrap video {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius-lg);
 }
-.tab-btn.active { background: var(--green); color: var(--bg-deep); }
-.tab-panel { display: none; margin-top: 1.5rem; }
-.tab-panel.active { display: block; }
 
 /* ═══════════════════════════════════════════
    BEFORE / AFTER
    ═══════════════════════════════════════════ */
 .ba {
   display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
-  background: rgba(255,255,255,0.03); border-radius: var(--radius-lg); overflow: hidden;
+  background: var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden;
+  margin-top: 1.5rem;
 }
 .ba-head {
-  padding: 0.7rem 1.5rem; background: rgba(255,255,255,0.02);
+  padding: 0.7rem 1.5rem; background: var(--bg-alt);
   font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em;
   font-weight: 700; color: var(--text-3);
 }
 .ba-cell {
-  padding: 1rem 1.5rem; background: rgba(255,255,255,0.015);
+  padding: 1rem 1.5rem; background: #fff;
   font-size: 0.86rem; line-height: 1.5;
 }
 .ba-cell.before { color: var(--text-2); }
 .ba-cell.after { color: var(--text-1); }
-.ba-cell .hl { color: var(--green); font-weight: 700; }
-.ba-cell .dim { color: var(--text-3); font-size: 0.8rem; }
-
+.ba-cell .hl { color: var(--green-dark); font-weight: 700; }
+.ba-cell .dim { color: var(--text-3); font-size: 0.8rem; display: block; margin-top: 0.2rem; }
 @media (max-width: 640px) {
   .ba { grid-template-columns: 1fr; }
   .ba-head { display: none; }
-  .ba-cell::after { font-size: 0.6rem; opacity: 0.2; margin-left: 0.4rem; }
+  .ba-cell::after { font-size: 0.6rem; opacity: 0.25; margin-left: 0.4rem; }
   .ba-cell.before::after { content: 'Before'; }
   .ba-cell.after::after { content: 'After'; color: var(--green); }
 }
@@ -302,6 +276,7 @@ body {
    ═══════════════════════════════════════════ */
 .multi-grid {
   display: grid; grid-template-columns: 1fr; gap: 0.75rem;
+  margin-top: 1.5rem;
 }
 @media (min-width: 640px) { .multi-grid { grid-template-columns: repeat(2, 1fr); } }
 .multi-card {
@@ -310,7 +285,7 @@ body {
   display: flex; gap: 0.75rem; align-items: flex-start;
   transition: all 0.3s;
 }
-.multi-card:hover { border-color: var(--border-card); }
+.multi-card:hover { border-color: var(--border-card); box-shadow: 0 6px 20px rgba(16,185,129,0.06); }
 .multi-card .mc-icon { font-size: 1.3rem; flex-shrink: 0; }
 .multi-card .mc-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.15rem; }
 .multi-card .mc-desc { font-size: 0.8rem; color: var(--text-2); line-height: 1.5; }
@@ -325,7 +300,7 @@ body {
 .stat-num {
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 900; letter-spacing: -0.04em; line-height: 1;
-  color: var(--green);
+  color: var(--green-dark);
 }
 .stat-label { font-size: 0.85rem; color: var(--text-2); margin-top: 0.4rem; line-height: 1.5; }
 
@@ -355,7 +330,7 @@ body {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md); padding: 1.75rem 1.5rem;
 }
-.col-card h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.75rem; color: var(--green); }
+.col-card h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.75rem; color: var(--green-dark); }
 .col-card ul { list-style: none; }
 .col-card ul li {
   padding: 0.5rem 0 0.5rem 1.2rem; position: relative;
@@ -372,26 +347,7 @@ body {
 .glow-line {
   height: 1px; max-width: 250px; margin: 0 auto;
   background: linear-gradient(90deg, transparent, var(--green), transparent);
-  opacity: 0.15;
-}
-
-/* ═══════════════════════════════════════════
-   IMAGE PLACEHOLDER
-   ═══════════════════════════════════════════ */
-.img-ph {
-  background: rgba(16,185,129,0.03);
-  border: 1px dashed rgba(16,185,129,0.12);
-  border-radius: var(--radius-lg);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text-3); font-size: 0.8rem;
-  min-height: 240px; margin-top: 2rem;
-}
-.img-ph .ph-icon { font-size: 2rem; margin-bottom: 0.3rem; }
-.img-ph.hero-ph {
-  min-height: 300px; max-width: 750px; margin: 2rem auto 0;
-  border-radius: 20px;
-  border: 1px solid rgba(16,185,129,0.08);
-  box-shadow: 0 0 80px rgba(16,185,129,0.04);
+  opacity: 0.2;
 }
 
 /* ═══════════════════════════════════════════
@@ -400,10 +356,12 @@ body {
 .cta-section {
   text-align: center; position: relative; overflow: hidden;
   padding: 7rem 0 9rem;
+  background: var(--text-1);
+  color: #fff;
 }
 .cta-section::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(16,185,129,0.07) 0%, transparent 70%);
+  background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(16,185,129,0.1) 0%, transparent 70%);
 }
 .cta-section > * { position: relative; }
 
@@ -419,10 +377,7 @@ body {
 /* ═══════════════════════════════════════════
    ANIMATIONS
    ═══════════════════════════════════════════ */
-.fade {
-  opacity: 0; transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
+.fade { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .fade.show { opacity: 1; transform: translateY(0); }
 
 /* ═══════════════════════════════════════════
@@ -433,30 +388,32 @@ body {
 .mt-4 { margin-top: 1rem; }
 .mt-5 { margin-top: 1.5rem; }
 .mt-6 { margin-top: 2rem; }
+.mt-7 { margin-top: 2.5rem; }
 .mb-2 { margin-bottom: 0.5rem; }
 .mb-3 { margin-bottom: 0.75rem; }
 
 /* ═══════════════════════════════════════════
-   TIPS ROW (like Accio tutorial)
+   SECTION ALT BG
    ═══════════════════════════════════════════ */
-.tips-row {
-  display: flex; gap: 0.75rem; flex-wrap: wrap;
-  justify-content: center; margin-top: 1.5rem;
+.section--alt { background: var(--bg-alt); }
+
+/* ═══════════════════════════════════════════
+   VIDEO SECTION
+   ═══════════════════════════════════════════ */
+.video-section-label {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.3rem 0.8rem; border-radius: 999px;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+  background: rgba(16,185,129,0.06);
+  color: var(--green-dark);
+  border: 1px solid rgba(16,185,129,0.12);
+  margin-bottom: 1.5rem;
 }
-.tip-pill {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.6rem 1rem; border-radius: 12px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--border-subtle);
-  font-size: 0.82rem; color: var(--text-2);
-}
-.tip-pill .tip-icon { font-size: 1.1rem; }
 </style>
 </head>
 <body>
 
 <div class="ambient"></div>
-
 <div class="page">
 
 <!-- NAV -->
@@ -472,6 +429,14 @@ body {
      ═══════════════════════════════════════════ -->
 <section class="section" style="padding-top:7rem;min-height:95vh;display:flex;align-items:center;">
   <div class="container tc">
+    <!-- Logo -->
+    <div class="fade" style="margin-bottom:1.5rem;">
+      <img
+        src="https://img.alicdn.com/imgextra/i4/O1CN01ABCxq51ToXAz6c9XL_!!6000000002429-54-tps-1654-356.apng"
+        alt="Accio Work Logo"
+        class="logo-img"
+      />
+    </div>
     <div class="badge fade"><span class="dot"></span>全新发布</div>
     <h1 class="h1 fade">
       跨境<span class="accent">生意</span>工作台
@@ -483,20 +448,17 @@ body {
       从市场洞察、科学选品、多平台运营、到经营分析等所有复杂流程，现在，你都可以交给 Accio Work。
     </p>
 
-    <!-- Product screenshot -->
-    <div class="fade" style="margin-top:2.5rem;">
-      <img
-        src="https://img.alicdn.com/imgextra/i2/O1CN017NBTd924AobvR2zSH_!!6000000007351-2-tps-2224-1578.png"
-        alt="Accio Work 产品界面"
-        style="
-          width: 100%; max-width: 800px; border-radius: 16px;
-          border: 1px solid rgba(255,255,255,0.08);
-          box-shadow: 0 0 80px rgba(16,185,129,0.06), 0 20px 60px rgba(0,0,0,0.4);
-        "
-      />
+    <!-- Hero Video -->
+    <div class="video-wrap fade">
+      <video
+        src="https://cloud.video.taobao.com/vod/gGWqD5foQwL7PtNxmq0pimNN8LAo47kspjxU47_crQE.mp4"
+        muted autoplay loop playsinline
+        preload="metadata"
+        style="width:100%;border-radius:var(--radius-lg);"
+      ></video>
     </div>
 
-    <div class="mt-6 fade" style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+    <div class="mt-7 fade" style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
       <a href="https://www.accio.com/work" class="btn btn-green">立即体验 →</a>
       <a href="#features" class="btn btn-ghost">了解更多</a>
     </div>
@@ -508,7 +470,7 @@ body {
 <!-- ═══════════════════════════════════════════
      三大特点
      ═══════════════════════════════════════════ -->
-<section class="section" id="features">
+<section class="section section--alt" id="features">
   <div class="container">
     <div class="tc">
       <div class="badge fade"><span class="dot"></span>三大特点</div>
@@ -553,7 +515,7 @@ body {
 <div class="glow-line"></div>
 
 <!-- ═══════════════════════════════════════════
-     电商运营全自动
+     电商运营全自动 + 视频
      ═══════════════════════════════════════════ -->
 <section class="section">
   <div class="container">
@@ -580,11 +542,14 @@ body {
       </div>
     </div>
 
-    <div class="img-ph fade">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
-        <span style="font-size:1.8rem;">📱</span>
-        <span>Agent 工作流截图</span>
-      </div>
+    <!-- Video -->
+    <div class="video-wrap fade">
+      <video
+        src="https://cloud.video.taobao.com/vod/gGWqD5foQwL7PtNxmq0pimNN8LAo47kspjxU47_crQE.mp4"
+        muted autoplay loop playsinline
+        preload="metadata"
+        style="width:100%;border-radius:var(--radius-lg);"
+      ></video>
     </div>
   </div>
 </section>
@@ -594,16 +559,14 @@ body {
 <!-- ═══════════════════════════════════════════
      Before & After
      ═══════════════════════════════════════════ -->
-<section class="section" style="background:rgba(255,255,255,0.006);">
+<section class="section section--alt">
   <div class="container">
     <!-- 已开国际站商家 -->
-    <div class="tc" style="margin-top:2rem;">
-      <h3 class="fade" style="font-size:1.4rem;font-weight:800;color:var(--text-1);">
-        已开国际站商家
-      </h3>
+    <div class="tc">
+      <h3 class="h3-title fade">已开国际站商家</h3>
       <p class="fade mt-2" style="color:var(--text-2);font-size:0.9rem;">更聪明 + 更省力</p>
     </div>
-    <div class="ba fade" style="margin-top:1.5rem;">
+    <div class="ba fade">
       <div class="ba-head">Before 使用 Accio Work</div>
       <div class="ba-head">After 使用 Accio Work</div>
       <div class="ba-cell before">学习成本<span class="dim">精通各种规则功能</span></div>
@@ -618,12 +581,21 @@ body {
 
     <!-- 未开国际站商家 -->
     <div class="tc" style="margin-top:4rem;">
-      <h3 class="fade" style="font-size:1.4rem;font-weight:800;color:var(--text-1);">
-        未开国际站商家
-      </h3>
+      <h3 class="h3-title fade">未开国际站商家</h3>
       <p class="fade mt-2" style="color:var(--text-2);font-size:0.9rem;">多平台生意一起做，接入国际站更专业</p>
     </div>
-    <div class="multi-grid fade" style="margin-top:1.5rem;">
+
+    <!-- Video for 未开国际站 -->
+    <div class="video-wrap fade" style="margin-top:1.5rem;">
+      <video
+        src="https://cloud.video.taobao.com/vod/wijOa2Zhv-Fu4d49qv-ubXviEThOhg4LRe9iSat78OI.mp4"
+        muted autoplay loop playsinline
+        preload="metadata"
+        style="width:100%;border-radius:var(--radius-lg);"
+      ></video>
+    </div>
+
+    <div class="multi-grid fade">
       <div class="multi-card">
         <div class="mc-icon">🔄</div>
         <div><div class="mc-title">一个工作台操作多电商后台</div><div class="mc-desc">无需切换</div></div>
@@ -676,7 +648,7 @@ body {
 <!-- ═══════════════════════════════════════════
      新增流量 + 运营提效
      ═══════════════════════════════════════════ -->
-<section class="section">
+<section class="section section--alt">
   <div class="container">
     <div class="tc">
       <div class="badge fade"><span class="dot"></span>新增流量 · 运营提效</div>
@@ -717,11 +689,11 @@ body {
      ═══════════════════════════════════════════ -->
 <section class="cta-section">
   <div class="container">
-    <div class="badge fade" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.12);"><span class="dot"></span>准备好了吗？</div>
+    <div class="badge fade" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.2);"><span class="dot"></span>准备好了吗？</div>
     <h2 class="h2 fade" style="font-size:clamp(2rem,5.5vw,3.2rem);">
-      让全球生意，<span class="accent">自己转起来</span>
+      让全球生意，<span class="accent" style="color:#fff;">自己转起来</span>
     </h2>
-    <p class="sub mx-auto fade mt-3">Accio Work，跨境生意工作台。</p>
+    <p class="sub mx-auto fade mt-3" style="color:rgba(255,255,255,0.5);">Accio Work，跨境生意工作台。</p>
     <div class="mt-6 fade" style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
       <a href="https://www.accio.com/work" class="btn btn-green">立即下载 →</a>
     </div>
@@ -733,10 +705,6 @@ body {
 <footer class="foot">Accio Work · 跨境生意工作台 · Alibaba.com</footer>
 
 <script>
-function switchTab(i) {
-  document.querySelectorAll('.tab-btn').forEach((b,j) => b.classList.toggle('active', j===i));
-  document.querySelectorAll('.tab-panel').forEach((p,j) => p.classList.toggle('active', j===i));
-}
 const obs = new IntersectionObserver(es => {
   es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); } });
 }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
