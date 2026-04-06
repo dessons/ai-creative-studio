@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accio Work — 跨境生意工作台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — Accio Dark Theme
+   ═══════════════════════════════════════════ */
+:root {
+  --green: #10b981;
+  --green-light: #34d399;
+  --green-dim: rgba(16,185,129,0.15);
+  --green-border: rgba(16,185,129,0.25);
+  --green-glow: rgba(16,185,129,0.08);
+  --bg-deep: #070c0a;
+  --bg-card: rgba(16,185,129,0.04);
+  --bg-card-hover: rgba(16,185,129,0.07);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-card: rgba(16,185,129,0.18);
+  --text-1: #f0f0f0;
+  --text-2: rgba(255,255,255,0.55);
+  --text-3: rgba(255,255,255,0.3);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Noto Sans SC", Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-1);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   AMBIENT — dark gradient bg like Accio
+   ═══════════════════════════════════════════ */
+.ambient {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(16,185,129,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(16,185,129,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 40% at 80% 60%, rgba(16,185,129,0.02) 0%, transparent 50%);
+}
+
+.page { position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 3.5rem; display: flex; align-items: center;
+  background: rgba(7,12,10,0.85);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+}
+.nav-logo { font-size: 1rem; font-weight: 800; letter-spacing: -0.02em; }
+.nav-logo .em { color: var(--green); }
+.nav-cta {
+  padding: 0.4rem 1rem; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 700; text-decoration: none;
+  background: var(--green); color: var(--bg-deep);
+  transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--green-light); }
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════════ */
+.container { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
+@media (min-width: 768px) { .container { padding: 0 2rem; } }
+.section { padding: 5rem 0; }
+@media (min-width: 768px) { .section { padding: 7rem 0; } }
+.tc { text-align: center; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════ */
+.h1 {
+  font-size: clamp(2.5rem, 7vw, 4.2rem);
+  font-weight: 900; letter-spacing: -0.04em; line-height: 1.08;
+}
+.h1-small {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 400; color: var(--text-2);
+  letter-spacing: -0.01em; line-height: 1.5;
+}
+.h2 {
+  font-size: clamp(2.4rem, 6vw, 3.5rem);
+  font-weight: 900; letter-spacing: -0.04em; line-height: 1.08;
+}
+.h2 .accent {
+  position: relative;
+}
+.h2 .accent::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: -2px;
+  height: 4px; background: var(--green);
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(16,185,129,0.4);
+}
+.h3 {
+  font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em;
+}
+.accent { color: var(--green); }
+.accent-underline {
+  color: var(--green); position: relative;
+  border-bottom: 2px solid var(--green);
+  padding-bottom: 2px;
+}
+.sub {
+  font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+  color: var(--text-2); max-width: 580px; line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem;
+  padding: 0.8rem 1.8rem; border-radius: 999px;
+  font-size: 0.92rem; font-weight: 700; text-decoration: none;
+  transition: all 0.25s; cursor: pointer; border: none;
+}
+.btn-green {
+  background: var(--green); color: var(--bg-deep);
+  box-shadow: 0 0 40px rgba(16,185,129,0.2), 0 0 80px rgba(16,185,129,0.06);
+}
+.btn-green:hover { background: var(--green-light); transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent; color: var(--text-1);
+  border: 1px solid var(--border-subtle);
+}
+.btn-ghost:hover { border-color: var(--green); color: var(--green); }
+
+/* ═══════════════════════════════════════════
+   EYEBROW BADGE
+   ═══════════════════════════════════════════ */
+.badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.3rem 0.8rem; border-radius: 999px;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(16,185,129,0.08);
+  color: var(--green);
+  border: 1px solid rgba(16,185,129,0.12);
+  margin-bottom: 1rem;
+}
+.badge .dot {
+  width: 0.3rem; height: 0.3rem; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px rgba(16,185,129,0.5);
+}
+
+/* ═══════════════════════════════════════════
+   CARD — dark with green border on hover
+   ═══════════════════════════════════════════ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem;
+  transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.card:hover {
+  border-color: var(--border-card);
+  background: var(--bg-card-hover);
+  box-shadow: 0 0 60px rgba(16,185,129,0.05);
+}
+
+/* ═══════════════════════════════════════════
+   STEP CARD — like Accio tutorial style
+   ═══════════════════════════════════════════ */
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2rem 1.5rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+.step-card::before {
+  content: ''; position: absolute; top: 0; left: 2rem;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px rgba(16,185,129,0.5);
+  transform: translateY(-50%);
+}
+.step-title {
+  font-size: 1.05rem; font-weight: 700;
+  padding-left: 1.5rem; margin-bottom: 1rem;
+  color: var(--text-1);
+}
+.step-title .accent { color: var(--green); }
+
+/* ═══════════════════════════════════════════
+   FEATURE GRID
+   ═══════════════════════════════════════════ */
+.feat-grid {
+  display: grid; grid-template-columns: 1fr; gap: 1rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 768px) { .feat-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
+
+.feat-icon {
+  width: 2.6rem; height: 2.6rem; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; margin-bottom: 1rem;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.1);
+}
+.feat-sub {
+  font-size: 0.82rem; color: var(--text-3); margin-top: 0.2rem;
+}
+.feat-list { list-style: none; margin-top: 1rem; }
+.feat-list li {
+  padding: 0.45rem 0 0.45rem 1.3rem; position: relative;
+  font-size: 0.86rem; color: var(--text-2); line-height: 1.5;
+}
+.feat-list li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--green); font-weight: 700; font-size: 0.78rem;
+}
+
+/* ═══════════════════════════════════════════
+   FLOW
+   ═══════════════════════════════════════════ */
+.flow {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin-top: 2rem; flex-wrap: wrap;
+}
+.flow-step { text-align: center; padding: 1rem 0.5rem; flex: 1; min-width: 65px; }
+.flow-step .emoji { font-size: 1.8rem; margin-bottom: 0.3rem; }
+.flow-step .label { font-size: 0.88rem; font-weight: 700; }
+.flow-arrow { font-size: 0.9rem; color: var(--text-3); flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════
+   TABS
+   ═══════════════════════════════════════════ */
+.tabs {
+  display: inline-flex; gap: 0.25rem; padding: 0.25rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px; margin-top: 1.5rem;
+}
+.tab-btn {
+  padding: 0.5rem 1.3rem; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 600; border: none;
+  background: transparent; color: var(--text-2); cursor: pointer;
+  transition: all 0.2s;
+}
+.tab-btn.active { background: var(--green); color: var(--bg-deep); }
+.tab-panel { display: none; margin-top: 1.5rem; }
+.tab-panel.active { display: block; }
+
+/* ═══════════════════════════════════════════
+   BEFORE / AFTER
+   ═══════════════════════════════════════════ */
+.ba {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  background: rgba(255,255,255,0.03); border-radius: var(--radius-lg); overflow: hidden;
+}
+.ba-head {
+  padding: 0.7rem 1.5rem; background: rgba(255,255,255,0.02);
+  font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em;
+  font-weight: 700; color: var(--text-3);
+}
+.ba-cell {
+  padding: 1rem 1.5rem; background: rgba(255,255,255,0.015);
+  font-size: 0.86rem; line-height: 1.5;
+}
+.ba-cell.before { color: var(--text-2); }
+.ba-cell.after { color: var(--text-1); }
+.ba-cell .hl { color: var(--green); font-weight: 700; }
+.ba-cell .dim { color: var(--text-3); font-size: 0.8rem; }
+
+@media (max-width: 640px) {
+  .ba { grid-template-columns: 1fr; }
+  .ba-head { display: none; }
+  .ba-cell::after { font-size: 0.6rem; opacity: 0.2; margin-left: 0.4rem; }
+  .ba-cell.before::after { content: 'Before'; }
+  .ba-cell.after::after { content: 'After'; color: var(--green); }
+}
+
+/* ═══════════════════════════════════════════
+   MULTI CARDS
+   ═══════════════════════════════════════════ */
+.multi-grid {
+  display: grid; grid-template-columns: 1fr; gap: 0.75rem;
+}
+@media (min-width: 640px) { .multi-grid { grid-template-columns: repeat(2, 1fr); } }
+.multi-card {
+  padding: 1.25rem; border-radius: var(--radius-md);
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  display: flex; gap: 0.75rem; align-items: flex-start;
+  transition: all 0.3s;
+}
+.multi-card:hover { border-color: var(--border-card); }
+.multi-card .mc-icon { font-size: 1.3rem; flex-shrink: 0; }
+.multi-card .mc-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.15rem; }
+.multi-card .mc-desc { font-size: 0.8rem; color: var(--text-2); line-height: 1.5; }
+
+/* ═══════════════════════════════════════════
+   STATS
+   ═══════════════════════════════════════════ */
+.stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+  max-width: 600px; margin: 2rem auto 0;
+}
+.stat-num {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900; letter-spacing: -0.04em; line-height: 1;
+  color: var(--green);
+}
+.stat-label { font-size: 0.85rem; color: var(--text-2); margin-top: 0.4rem; line-height: 1.5; }
+
+/* ═══════════════════════════════════════════
+   FLYWHEEL
+   ═══════════════════════════════════════════ */
+.fw {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin-top: 2.5rem; flex-wrap: wrap;
+}
+.fw-item { text-align: center; padding: 0.8rem 0.4rem; flex: 1; min-width: 90px; }
+.fw-item .emoji { font-size: 1.8rem; margin-bottom: 0.3rem; }
+.fw-item .label { font-size: 0.85rem; font-weight: 700; }
+.fw-item .desc { font-size: 0.72rem; color: var(--text-2); margin-top: 0.1rem; }
+.fw-arrow { font-size: 1rem; color: var(--text-3); flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════
+   TWO COL
+   ═══════════════════════════════════════════ */
+.two-col {
+  display: grid; grid-template-columns: 1fr; gap: 1rem;
+  margin-top: 2rem;
+}
+@media (min-width: 768px) { .two-col { grid-template-columns: 1fr 1fr; } }
+.col-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 1.75rem 1.5rem;
+}
+.col-card h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.75rem; color: var(--green); }
+.col-card ul { list-style: none; }
+.col-card ul li {
+  padding: 0.5rem 0 0.5rem 1.2rem; position: relative;
+  font-size: 0.85rem; color: var(--text-2); line-height: 1.5;
+}
+.col-card ul li::before {
+  content: '›'; position: absolute; left: 0;
+  color: var(--green); font-weight: 700; font-size: 1.05rem;
+}
+
+/* ═══════════════════════════════════════════
+   DIVIDER
+   ═══════════════════════════════════════════ */
+.glow-line {
+  height: 1px; max-width: 250px; margin: 0 auto;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  opacity: 0.15;
+}
+
+/* ═══════════════════════════════════════════
+   IMAGE PLACEHOLDER
+   ═══════════════════════════════════════════ */
+.img-ph {
+  background: rgba(16,185,129,0.03);
+  border: 1px dashed rgba(16,185,129,0.12);
+  border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-3); font-size: 0.8rem;
+  min-height: 240px; margin-top: 2rem;
+}
+.img-ph .ph-icon { font-size: 2rem; margin-bottom: 0.3rem; }
+.img-ph.hero-ph {
+  min-height: 300px; max-width: 750px; margin: 2rem auto 0;
+  border-radius: 20px;
+  border: 1px solid rgba(16,185,129,0.08);
+  box-shadow: 0 0 80px rgba(16,185,129,0.04);
+}
+
+/* ═══════════════════════════════════════════
+   CTA
+   ═══════════════════════════════════════════ */
+.cta-section {
+  text-align: center; position: relative; overflow: hidden;
+  padding: 7rem 0 9rem;
+}
+.cta-section::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(16,185,129,0.07) 0%, transparent 70%);
+}
+.cta-section > * { position: relative; }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+.foot {
+  text-align: center; padding: 1.5rem;
+  font-size: 0.7rem; color: var(--text-3);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════ */
+.fade {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade.show { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════════
+   SPACING
+   ═══════════════════════════════════════════ */
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-5 { margin-top: 1.5rem; }
+.mt-6 { margin-top: 2rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+
+/* ═══════════════════════════════════════════
+   TIPS ROW (like Accio tutorial)
+   ═══════════════════════════════════════════ */
+.tips-row {
+  display: flex; gap: 0.75rem; flex-wrap: wrap;
+  justify-content: center; margin-top: 1.5rem;
+}
+.tip-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.6rem 1rem; border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.82rem; color: var(--text-2);
+}
+.tip-pill .tip-icon { font-size: 1.1rem; }
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+
+<div class="page">
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="em">Accio</span> Work</div>
+    <a href="https://www.accio.com/work" class="nav-cta">立即下载</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════ -->
+<section class="section" style="padding-top:7rem;min-height:95vh;display:flex;align-items:center;">
+  <div class="container tc">
+    <div class="badge fade"><span class="dot"></span>全新发布</div>
+    <h1 class="h1 fade">
+      跨境<span class="accent">生意</span>工作台
+    </h1>
+    <p class="h1-small fade mt-3">
+      一个能自主帮中小企业做全球生意的 Agent 团队
+    </p>
+    <p class="sub mx-auto fade mt-5">
+      从市场洞察、科学选品、多平台运营、到经营分析等所有复杂流程，现在，你都可以交给 Accio Work。
+    </p>
+
+    <!-- Product screenshot -->
+    <div class="fade" style="margin-top:2.5rem;">
+      <img
+        src="https://img.alicdn.com/imgextra/i2/O1CN017NBTd924AobvR2zSH_!!6000000007351-2-tps-2224-1578.png"
+        alt="Accio Work 产品界面"
+        style="
+          width: 100%; max-width: 800px; border-radius: 16px;
+          border: 1px solid rgba(255,255,255,0.08);
+          box-shadow: 0 0 80px rgba(16,185,129,0.06), 0 20px 60px rgba(0,0,0,0.4);
+        "
+      />
+    </div>
+
+    <div class="mt-6 fade" style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+      <a href="https://www.accio.com/work" class="btn btn-green">立即体验 →</a>
+      <a href="#features" class="btn btn-ghost">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ═══════════════════════════════════════════
+     三大特点
+     ═══════════════════════════════════════════ -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="tc">
+      <div class="badge fade"><span class="dot"></span>三大特点</div>
+      <h2 class="h2 fade">为什么它不一样</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="card fade" style="margin-top:2.5rem;">
+        <div class="feat-icon">⚡</div>
+        <h3>极度简单</h3>
+        <p class="feat-sub">0 门槛上手</p>
+        <ul class="feat-list">
+          <li>accio.com/work 下载即用，无需培训</li>
+          <li>大白话发指令，Agent 自动调用顶尖模型</li>
+          <li>可拉起 Agent 团队完成复杂任务</li>
+          <li>帮你做全球生意，即开即用</li>
+        </ul>
+      </div>
+      <div class="card fade" style="margin-top:2.5rem;">
+        <div class="feat-icon">💼</div>
+        <h3>专业性强</h3>
+        <p class="feat-sub">能赚钱的 Agent</p>
+        <ul class="feat-list">
+          <li>专为跨境场景调优，擅长生意经营</li>
+          <li>市场调研、选品、营销、客服全覆盖</li>
+          <li>直连阿里国际站，顺畅调用专业工具</li>
+          <li>不只办公，帮你对外拓展赚钱</li>
+        </ul>
+      </div>
+      <div class="card fade" style="margin-top:2.5rem;">
+        <div class="feat-icon">🛡️</div>
+        <h3>安全可靠</h3>
+        <p class="feat-sub">企业级数据安全</p>
+        <ul class="feat-list">
+          <li>企业级数据安全标准，数据保留本地端</li>
+          <li>国内合规，放心使用</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ═══════════════════════════════════════════
+     电商运营全自动
+     ═══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="badge fade"><span class="dot"></span>为什么值得拥有</div>
+    <h2 class="h2 fade">电商运营全自动</h2>
+
+    <p class="sub fade mt-4">
+      Accio Work 现已支持全自动市场洞察、智能选品、国际站经营分析等功能。<br>
+      <em style="font-size:0.82rem;color:var(--text-3);">* 即将开放更多专业能力</em>
+    </p>
+
+    <div class="fade mt-5">
+      <p class="mb-3" style="font-size:0.92rem;color:var(--text-2);">
+        商家只要：想创意 → 下命令 → 提要求 → 看汇报，其余全交给 Agent
+      </p>
+      <div class="flow">
+        <div class="flow-step"><div class="emoji">💡</div><div class="label">想创意</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="emoji">📋</div><div class="label">下命令</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="emoji">🎯</div><div class="label">提要求</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="emoji">📊</div><div class="label">看汇报</div></div>
+      </div>
+    </div>
+
+    <div class="img-ph fade">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+        <span style="font-size:1.8rem;">📱</span>
+        <span>Agent 工作流截图</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ═══════════════════════════════════════════
+     Before & After
+     ═══════════════════════════════════════════ -->
+<section class="section" style="background:rgba(255,255,255,0.006);">
+  <div class="container">
+    <!-- 已开国际站商家 -->
+    <div class="tc" style="margin-top:2rem;">
+      <h3 class="fade" style="font-size:1.4rem;font-weight:800;color:var(--text-1);">
+        已开国际站商家
+      </h3>
+      <p class="fade mt-2" style="color:var(--text-2);font-size:0.9rem;">更聪明 + 更省力</p>
+    </div>
+    <div class="ba fade" style="margin-top:1.5rem;">
+      <div class="ba-head">Before 使用 Accio Work</div>
+      <div class="ba-head">After 使用 Accio Work</div>
+      <div class="ba-cell before">学习成本<span class="dim">精通各种规则功能</span></div>
+      <div class="ba-cell after"><span class="hl">零成本</span>只需下命令</div>
+      <div class="ba-cell before">执行效率<span class="dim">受限于人的体力时长</span></div>
+      <div class="ba-cell after"><span class="hl">7×24 小时</span>自动流转</div>
+      <div class="ba-cell before">管理重心<span class="dim">盯员工操作和考勤</span></div>
+      <div class="ba-cell after">聚焦<span class="hl">创意策略方向</span></div>
+      <div class="ba-cell before">系统协同<span class="dim">多后台切换割裂</span></div>
+      <div class="ba-cell after"><span class="hl">一台全盘 一屏掌控</span></div>
+    </div>
+
+    <!-- 未开国际站商家 -->
+    <div class="tc" style="margin-top:4rem;">
+      <h3 class="fade" style="font-size:1.4rem;font-weight:800;color:var(--text-1);">
+        未开国际站商家
+      </h3>
+      <p class="fade mt-2" style="color:var(--text-2);font-size:0.9rem;">多平台生意一起做，接入国际站更专业</p>
+    </div>
+    <div class="multi-grid fade" style="margin-top:1.5rem;">
+      <div class="multi-card">
+        <div class="mc-icon">🔄</div>
+        <div><div class="mc-title">一个工作台操作多电商后台</div><div class="mc-desc">无需切换</div></div>
+      </div>
+      <div class="multi-card">
+        <div class="mc-icon">🏪</div>
+        <div><div class="mc-title">30 分钟自动建起装修精美、功能齐全的网店</div></div>
+      </div>
+      <div class="multi-card">
+        <div class="mc-icon">📢</div>
+        <div><div class="mc-title">自主在海外各大平台发帖推广、营销投流</div></div>
+      </div>
+      <div class="multi-card">
+        <div class="mc-icon">⚙️</div>
+        <div><div class="mc-title">形成完整自动电商工作流</div><div class="mc-desc">通用能力覆盖日常</div></div>
+      </div>
+      <div class="multi-card">
+        <div class="mc-icon">🌟</div>
+        <div><div class="mc-title">接入国际站可发挥最强能力</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ═══════════════════════════════════════════
+     海外流量双入口
+     ═══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container tc">
+    <div class="badge fade"><span class="dot"></span>海外流量「双入口」</div>
+    <h2 class="h2 fade">Accio Work × 国际站 <span class="accent">= 1+1>2</span></h2>
+
+    <div class="stats-grid fade">
+      <div>
+        <div class="stat-num">1,000 万+</div>
+        <div class="stat-label">Accio 海外企业用户<br>已占领 AI 采购入口</div>
+      </div>
+      <div>
+        <div class="stat-num">30 分钟</div>
+        <div class="stat-label">老外 30 分钟即可开店<br>催生大量海外需求</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- ═══════════════════════════════════════════
+     新增流量 + 运营提效
+     ═══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="tc">
+      <div class="badge fade"><span class="dot"></span>新增流量 · 运营提效</div>
+      <h2 class="h2 fade">流量正向飞轮</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="col-card fade">
+        <h4>新增流量</h4>
+        <ul>
+          <li>Accio Work 直连国际站，更认可信息齐全的优质供给</li>
+          <li>优先向海外用户推荐国际站供应商，流量直接导入</li>
+        </ul>
+      </div>
+      <div class="col-card fade">
+        <h4>运营提效</h4>
+        <ul>
+          <li>自动调用国际站工具，以最简单方式运营好店铺</li>
+          <li>运营越好 → 流量越多 → 效果越强，正向飞轮</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fw fade">
+      <div class="fw-item"><div class="emoji">🔗</div><div class="label">直连</div><div class="desc">更认可优质供给</div></div>
+      <div class="fw-arrow">+</div>
+      <div class="fw-item"><div class="emoji">🚀</div><div class="label">优先推荐</div><div class="desc">流量直接导入</div></div>
+      <div class="fw-arrow">+</div>
+      <div class="fw-item"><div class="emoji">🛠️</div><div class="label">自动运营</div><div class="desc">最简单方式</div></div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-item"><div class="emoji">📈</div><div class="label">正向飞轮</div><div class="desc">运营越好 流量越多</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA
+     ═══════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="badge fade" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.12);"><span class="dot"></span>准备好了吗？</div>
+    <h2 class="h2 fade" style="font-size:clamp(2rem,5.5vw,3.2rem);">
+      让全球生意，<span class="accent">自己转起来</span>
+    </h2>
+    <p class="sub mx-auto fade mt-3">Accio Work，跨境生意工作台。</p>
+    <div class="mt-6 fade" style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+      <a href="https://www.accio.com/work" class="btn btn-green">立即下载 →</a>
+    </div>
+  </div>
+</section>
+
+</div><!-- /page -->
+
+<footer class="foot">Accio Work · 跨境生意工作台 · Alibaba.com</footer>
+
+<script>
+function switchTab(i) {
+  document.querySelectorAll('.tab-btn').forEach((b,j) => b.classList.toggle('active', j===i));
+  document.querySelectorAll('.tab-panel').forEach((p,j) => p.classList.toggle('active', j===i));
+}
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
